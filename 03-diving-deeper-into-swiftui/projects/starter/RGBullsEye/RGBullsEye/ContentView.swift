@@ -36,35 +36,60 @@ struct ContentView: View {
   @State var game = Game()
   @State var guess: RGB
   @State var showScore = false
+  let circleSize: CGFloat = 0.275
+  let labelHeight: CGFloat = 0.06
+  let labelWidth: CGFloat = 0.53
+  let buttonWidth: CGFloat = 0.87
 
   var body: some View {
-    VStack {
-      ColorCircle(rgb: game.target, size: 200)
-      if !showScore {
-        Text("R: ??? G: ??? B: ???")
-          .padding()
-      } else {
-        Text(game.target.intString())
-          .padding()
-      }
-      ColorCircle(rgb: guess, size: 200)
-      Text(guess.intString())
-        .padding()
-      ColorSlider(value: $guess.red, trackColor: .red)
-      ColorSlider(value: $guess.green, trackColor: .green)
-      ColorSlider(value: $guess.blue, trackColor: .blue)
-      Button("Hit Me!") {
-        showScore = true
-        game.check(guess: guess)
-      }
-      .alert(isPresented: $showScore) {
-        Alert(
-          title: Text("Your Score"),
-          message: Text(String(game.scoreRound)),
-          dismissButton: .default(Text("OK")) {
-            game.startNewRound()
-            guess = RGB()
-          })
+    GeometryReader { proxy in
+      ZStack {
+        Color.element
+          .edgesIgnoringSafeArea(.all)
+        VStack {
+          ColorCircle(
+            rgb: game.target,
+            size: proxy.size.height * circleSize)
+          if !showScore {
+            BevelText(
+              text: "R: ??? G: ??? B: ???",
+              width: proxy.size.width * labelWidth,
+              height: proxy.size.height * labelHeight)
+          } else {
+            BevelText(
+              text: game.target.intString(),
+              width: proxy.size.width * labelWidth,
+              height: proxy.size.height * labelHeight)
+          }
+          ColorCircle(
+            rgb: guess,
+            size: proxy.size.height * circleSize)
+          BevelText(
+            text: guess.intString(),
+            width: proxy.size.width * labelWidth,
+            height: proxy.size.height * labelHeight)
+          ColorSlider(value: $guess.red, trackColor: .red)
+          ColorSlider(value: $guess.green, trackColor: .green)
+          ColorSlider(value: $guess.blue, trackColor: .blue)
+          Button("Hit Me!") {
+            showScore = true
+            game.check(guess: guess)
+          }
+          .buttonStyle(
+            NeuButtonStyle(
+              width: proxy.size.width * buttonWidth,
+              height: proxy.size.height * labelHeight))
+          .alert(isPresented: $showScore) {
+            Alert(
+              title: Text("Your Score"),
+              message: Text(String(game.scoreRound)),
+              dismissButton: .default(Text("OK")) {
+                game.startNewRound()
+                guess = RGB()
+              })
+          }
+        }
+        .font(.headline)
       }
     }
   }
@@ -87,6 +112,7 @@ struct ColorSlider: View {
         .accentColor(trackColor)
       Text("255")
     }
+    .font(.subheadline)
     .padding(.horizontal)
   }
 }
