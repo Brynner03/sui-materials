@@ -32,17 +32,30 @@
 
 import SwiftUI
 
-@main
-struct KuchiApp: App {
-  var body: some Scene {
-    WindowGroup {
-      RegisterView()
+struct WelcomeMessageView: View {
+    var body: some View {
+        Label {
+            VStack(alignment: .leading) {
+                Text("Welcome to")
+                    .font(.headline)
+                    .bold()
+                Text("Kuchi")
+                    .font(.largeTitle)
+                    .bold()
+            }
+            .foregroundColor(.red)
+            .lineLimit(2)
+            .multilineTextAlignment(.leading)
+            .padding(.horizontal)
+        } icon: {
+            LogoImage()
+        }
+        .labelStyle(HorizontallyAlignedLabelStyle())
     }
-  }
 }
 
-struct KuchiApp_Previews: PreviewProvider {
-  static var previews: some View {
-    RegisterView()
-  }
+struct WelcomeMessageView_Previews: PreviewProvider {
+    static var previews: some View {
+        WelcomeMessageView()
+    }
 }
