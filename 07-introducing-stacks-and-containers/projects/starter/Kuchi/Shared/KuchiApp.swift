@@ -34,6 +34,7 @@ import SwiftUI
 
 @main
 struct KuchiApp: App {
+
   let userManager = UserManager()
   
   init() {
@@ -42,7 +43,7 @@ struct KuchiApp: App {
   
   var body: some Scene {
     WindowGroup {
-      RegisterView()
+      StarterView()
         .environmentObject(userManager)
     }
   }

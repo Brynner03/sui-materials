@@ -34,12 +34,13 @@ import SwiftUI
 
 /// Displays the practice view with question and potential answers (choices).
 struct PracticeView: View {
+
   @Binding var challengeTest: ChallengeTest?
   @Binding var userName: String
   
   var body: some View {
     if challengeTest != nil {
-      ChallengeView()
+      ChallengeView(challengeTest: challengeTest!)
     } else {
       CongratulationsView(userName: userName)
     }
