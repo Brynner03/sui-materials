@@ -32,43 +32,14 @@
 
 import SwiftUI
 
-struct ChallengeView: View {
-  let challengeTest: ChallengeTest
-  
-  @State var showAnswers = false
-
-  var body: some View {
-    VStack {
-      Button(action: {
-        showAnswers.toggle()
-      }) {
-        QuestionView(question: challengeTest.challenge.question)
-          .frame(height: 300)
-      }
-        ScoreView(numberOfQuestions: 5)
-      
-      if showAnswers {
-        Divider()
-        ChoicesView(challengeTest: challengeTest)
-          .frame(height: 300)
-          .padding()
-      }
+struct ScoreView: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
-  }
 }
 
-
-struct ChallengeView_Previews: PreviewProvider {
-  static let challengeTest = ChallengeTest(
-    challenge: Challenge(
-      question: "おねがい　します",
-      pronunciation: "Onegai shimasu",
-      answer: "Please"
-    ),
-    answers: ["Thank you", "Hello", "Goodbye"]
-  )
-  
-  static var previews: some View {
-    return ChallengeView(challengeTest: challengeTest)
-  }
+struct ScoreView_Previews: PreviewProvider {
+    static var previews: some View {
+        ScoreView()
+    }
 }

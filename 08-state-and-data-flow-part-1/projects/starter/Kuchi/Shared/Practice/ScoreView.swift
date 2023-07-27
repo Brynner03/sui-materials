@@ -32,43 +32,25 @@
 
 import SwiftUI
 
-struct ChallengeView: View {
-  let challengeTest: ChallengeTest
-  
-  @State var showAnswers = false
+struct ScoreView: View {
+    
+    let numberOfQuestions: Int
+    @State var numberOfAnswered: Int = 0
 
-  var body: some View {
-    VStack {
-      Button(action: {
-        showAnswers.toggle()
-      }) {
-        QuestionView(question: challengeTest.challenge.question)
-          .frame(height: 300)
-      }
-        ScoreView(numberOfQuestions: 5)
-      
-      if showAnswers {
-        Divider()
-        ChoicesView(challengeTest: challengeTest)
-          .frame(height: 300)
-          .padding()
-      }
+    var body: some View {
+        HStack {
+            Text("\(numberOfAnswered)/\(numberOfQuestions)")
+                .font(.caption)
+                .padding(4)
+            Spacer()
+        }
     }
-  }
 }
 
-
-struct ChallengeView_Previews: PreviewProvider {
-  static let challengeTest = ChallengeTest(
-    challenge: Challenge(
-      question: "おねがい　します",
-      pronunciation: "Onegai shimasu",
-      answer: "Please"
-    ),
-    answers: ["Thank you", "Hello", "Goodbye"]
-  )
-  
-  static var previews: some View {
-    return ChallengeView(challengeTest: challengeTest)
-  }
+struct ScoreView_Previews: PreviewProvider {
+    @State static var numberOfAnswered: Int = 0
+    
+    static var previews: some View {
+        ScoreView(numberOfQuestions: 5)
+    }
 }
