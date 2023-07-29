@@ -45,6 +45,7 @@ struct SuccessView: View {
       VStack {
         Image("wand")
           .resizable()
+          .accessibilityHidden(true)
           .frame(width: imageSize, height: imageSize)
         Text("Congratulations!")
           .font(.largeTitle)
@@ -60,10 +61,12 @@ struct SuccessView: View {
             text: "Guess: " + guess.intString,
             bkgd: Color(rgbStruct: guess))
         }
+        .accessibilityLabel("Your guess: " + guess.accString)
         .font(.title3)
         .foregroundColor(Color("grayText"))
         .multilineTextAlignment(.center)
       }
+      .accessibilityElement(children: .combine)
       VStack(spacing: 20) {
         Spacer()
         Button("Try another one?") {

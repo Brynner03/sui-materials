@@ -56,6 +56,7 @@ struct ContentView: View {
               text: "R: ??? G: ??? B: ???",
               width: proxy.size.width * labelWidth,
               height: proxy.size.height * labelHeight)
+            .accessibilityLabel("Target red, green, blue, values you must guess")
           } else {
             BevelText(
               text: game.target.intString,
@@ -69,25 +70,30 @@ struct ContentView: View {
             text: guess.intString,
             width: proxy.size.width * labelWidth,
             height: proxy.size.height * labelHeight)
+          .accessibilityLabel("Your guess: " + guess.accString)
+          .accessibilitySortPriority(2)
           ColorSlider(value: $guess.red, trackColor: .red)
+                .accessibilitySortPriority(5)
           ColorSlider(value: $guess.green, trackColor: .green)
+                .accessibilitySortPriority(4)
           ColorSlider(value: $guess.blue, trackColor: .blue)
+                .accessibilitySortPriority(3)
           Button("Hit Me!") {
             self.showScore = true
             self.game.check(guess: guess)
           }
+          .accessibilitySortPriority(1)
           .buttonStyle(
             NeuButtonStyle(
               width: proxy.size.width * buttonWidth,
               height: proxy.size.height * labelHeight))
-          .alert(isPresented: $showScore) {
-            Alert(
-              title: Text("Your Score"),
-              message: Text(String(game.scoreRound)),
-              dismissButton: .default(Text("OK")) {
-                self.game.startNewRound()
-                self.guess = RGB()
-              })
+          .sheet(isPresented: $showScore) {
+              SuccessView(
+                game: $game,
+                score: game.scoreRound,
+                target: game.target,
+                guess: $guess
+              )
           }
         }
         .font(.headline)
@@ -114,9 +120,14 @@ struct ColorSlider: View {
   var body: some View {
     HStack {
       Text("0")
+            .accessibilityHidden(true)
       Slider(value: $value)
         .accentColor(trackColor)
+        .accessibilityValue(
+            String(describing: trackColor) +
+            String(Int(value * 255)))
       Text("255")
+            .accessibilityHidden(true)
     }
     .font(.subheadline)
     .padding(.horizontal)
