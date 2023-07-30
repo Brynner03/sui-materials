@@ -65,7 +65,7 @@ struct FlightRow: View {
         }.foregroundColor(flight.statusColor)
         HStack {
           Text(flight.otherAirport)
-          Text("·")
+          Text("-")
           Text("Gate \(flight.gate)")
         }.foregroundColor(.gray)
       }

@@ -104,7 +104,7 @@ struct FlightStatusBoard: View {
           trailing: Toggle(
             "Hide Past",
             isOn: $hidePast
-          )
+          ).accessibilityHint("Use the tab bar to show only arrivals or departures.")
         )
       }
     }

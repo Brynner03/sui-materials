@@ -39,6 +39,14 @@ struct LearnView: View {
     VStack {
       Spacer()
       
+        if UIAccessibility.isVoiceOverRunning {
+            Text("Swipe left if you remembered"
+              + "\nSwipe right if you didn't")
+            .font(.headline)
+        } else {
+            EmptyView()
+        }
+        
       Text("Swipe left if you remembered"
            + "\nSwipe right if you didn’t")
         .font(.headline)
