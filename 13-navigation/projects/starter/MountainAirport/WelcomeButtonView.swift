@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco Inc.
+/// Copyright (c) 2023 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -18,10 +18,6 @@
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
 ///
-/// This project and source code may use libraries or frameworks that are
-/// released under various Open-Source licenses. Use of those libraries and
-/// frameworks are governed by their own individual licenses.
-///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -32,43 +28,35 @@
 
 import SwiftUI
 
-struct FlightDetails: View {
-  var flight: FlightInformation
-  @EnvironmentObject var lastFlightInfo: FlightNavigationInfo
+struct WelcomeButtonView: View {
+  var title: String
+  var subTitle: String
 
   var body: some View {
-    ZStack {
-      Image("background-view")
-        .resizable()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-      VStack(alignment: .leading) {
-        HStack {
-          FlightDirectionGraphic(direction: flight.direction)
-            .frame(width: 40, height: 40)
-          VStack(alignment: .leading) {
-            Text("\(flight.dirString) \(flight.otherAirport)")
-            Text(flight.flightStatus)
-              .font(.subheadline)
-          }.font(.title2)
-        }
-        Spacer()
-      }.foregroundColor(.white)
-      .padding()
-      .navigationTitle("\(flight.airline) Flight \(flight.number)")
-    }
-    .onAppear {
-      lastFlightInfo.lastFlightId = flight.id
-    }
+    VStack(alignment: .leading) {
+      Text(title)
+        .font(.title)
+        .foregroundColor(.white)
+      Text(subTitle)
+        .font(.subheadline)
+        .foregroundColor(.white)
+    }.padding()
+    // 1
+      .frame(maxWidth: .infinity, alignment: .leading)
+    // 2
+      .background(
+        Image("link-pattern")
+          .resizable()
+          .clipped()
+      )
   }
 }
 
-struct FlightDetails_Previews: PreviewProvider {
+struct WelcomeButtonView_Previews: PreviewProvider {
   static var previews: some View {
-    NavigationView {
-      FlightDetails(
-        flight: FlightData.generateTestFlight(date: Date())
-      )
-      .environmentObject(FlightNavigationInfo())
-    }
+    WelcomeButtonView(
+      title: "Flight Status",
+      subTitle: "Departure and Arrival Information"
+    )
   }
 }

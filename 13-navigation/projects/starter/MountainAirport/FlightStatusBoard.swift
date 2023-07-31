@@ -32,14 +32,105 @@
 
 import SwiftUI
 
-struct FlightStatusBoard: View {
+struct FlightList: View {
+  var flights: [FlightInformation]
+  var flightToShow: FlightInformation?
+  @State private var path: [FlightInformation] = []
+
   var body: some View {
-    Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    NavigationStack(path: $path) {
+      List(flights, id: \.id) { flight in
+        NavigationLink(flight.statusBoardName, value: flight)
+      }
+      .navigationDestination(
+        for: FlightInformation.self,
+        destination: { flight in
+          FlightDetails(flight: flight)
+        }
+      )
+    }
+    .onAppear {
+      if let flight = flightToShow {
+        path.append(flight)
+      }
+    }
+  }
+}
+
+struct FlightStatusBoard: View {
+  var flights: [FlightInformation]
+  var flightToShow: FlightInformation?
+  @State private var hidePast = false
+  @AppStorage("FlightStatusCurrentTab") var selectedTab = 1
+
+  var shownFlights: [FlightInformation] {
+    hidePast ?
+      flights.filter { $0.localTime >= Date() } :
+      flights
+  }
+
+  var shortDateString: String {
+    let dateF = DateFormatter()
+    dateF.timeStyle = .none
+    dateF.dateFormat = "MMM d"
+    return dateF.string(from: Date())
+  }
+
+  var body: some View {
+    // 1
+    TabView(selection: $selectedTab) {
+      // 2
+      FlightList(
+        flights: shownFlights.filter { $0.direction == .arrival }
+      )
+      // 3
+      .tabItem {
+        // 4
+        Image("descending-airplane")
+          .resizable()
+        Text("Arrivals")
+      }
+      .badge(shownFlights.filter { $0.direction == .arrival }.count)
+      .tag(0)
+      // 5
+      FlightList(
+        flights: shownFlights,
+        flightToShow: flightToShow
+      )
+      .tabItem {
+        Image(systemName: "airplane")
+          .resizable()
+        Text("All")
+      }
+      .badge(shortDateString)
+      .tag(1)
+      FlightList(
+        flights: shownFlights.filter { $0.direction == .departure }
+      )
+      .tabItem {
+        Image("ascending-airplane")
+        Text("Departures")
+      }
+      .badge(shownFlights.filter { $0.direction == .departure }.count)
+      .tag(2)
+    }
+    .onAppear {
+      if flightToShow != nil {
+        selectedTab = 1
+      }
+    }
+    .navigationTitle("Today's Flight Status")
+    .navigationBarItems(
+      trailing: Toggle("Hide Past", isOn: $hidePast)
+    )
   }
 }
 
 struct FlightStatusBoard_Previews: PreviewProvider {
   static var previews: some View {
-    FlightStatusBoard()
+    FlightStatusBoard(
+      flights: FlightData.generateTestFlights(date: Date())
+    )
+    .environmentObject(FlightNavigationInfo())
   }
 }

@@ -32,29 +32,82 @@
 
 import SwiftUI
 
+enum FlightViewId: CaseIterable {
+  case showFlightStatus
+  case showLastFlight
+}
+
+struct ViewButton: Identifiable {
+  var id: FlightViewId
+  var title: String
+  var subtitle: String
+}
+
 struct WelcomeView: View {
   @StateObject var flightInfo = FlightData()
+  @State private var selectedView: FlightViewId?
+  @StateObject var lastFlightInfo = FlightNavigationInfo()
+
+  var sidebarButtons: [ViewButton] {
+    var buttons: [ViewButton] = []
+
+    buttons.append(
+      ViewButton(
+        id: .showFlightStatus,
+        title: "Flight Status",
+        subtitle: "Departure and arrival information"
+      )
+    )
+
+    if
+      let flightId = lastFlightInfo.lastFlightId,
+      let flight = flightInfo.getFlightById(flightId) {
+      buttons.append(
+        ViewButton(
+          id: .showLastFlight,
+          title: "\(flight.flightName)",
+          subtitle: "The Last Flight You Viewed"
+        )
+      )
+    }
+
+    return buttons
+  }
 
   var body: some View {
-    VStack(alignment: .leading) {
-      ZStack(alignment: .topLeading) {
-        // Background
-        Image("welcome-background")
-          .resizable()
-          .aspectRatio(contentMode: .fill)
-          .frame(width: 375, height: 250)
-          .clipped()
-        // Title
-        VStack {
-          Text("Mountain Airport")
-            .font(.system(size: 28.0, weight: .bold))
-          Text("Flight Status")
-        }
-        .foregroundColor(.white)
-        .padding()
+    NavigationSplitView {
+      List(sidebarButtons, selection: $selectedView) { button in
+        WelcomeButtonView(
+          title: button.title,
+          subTitle: button.subtitle
+        )
       }
-      Spacer()
-    }.font(.title)
+      .navigationTitle("Mountain Airport")
+      .listStyle(.plain)
+    } detail: {
+      // 1
+      if let view = selectedView {
+        // 2
+        switch view {
+        case .showFlightStatus:
+          // 3
+          FlightStatusBoard(flights: flightInfo.getDaysFlights(Date()))
+        case .showLastFlight:
+          if
+            let flightId = lastFlightInfo.lastFlightId,
+            let flight = flightInfo.getFlightById(flightId) {
+            FlightStatusBoard(
+              flights: flightInfo.getDaysFlights(Date()),
+              flightToShow: flight
+            )
+          }
+        }
+      } else {
+        // 4
+        Text("Select an option in the sidebar.")
+      }
+    }
+    .environmentObject(lastFlightInfo)
   }
 }
 
