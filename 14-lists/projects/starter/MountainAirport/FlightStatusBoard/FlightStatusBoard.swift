@@ -75,7 +75,7 @@ struct FlightStatusBoard: View {
         selectedTab = 1
       }
     }
-    .navigationTitle("Today's Flight Status")
+    .navigationTitle("Flight Status")
     .navigationBarItems(
       trailing: Toggle("Hide Past", isOn: $hidePast)
     )
