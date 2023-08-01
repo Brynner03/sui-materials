@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco Inc
+/// Copyright (c) 2021 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,6 @@ import SwiftUI
 
 struct FlightDetails: View {
   var flight: FlightInformation
-  @State private var showTerminalInfo = false
   @EnvironmentObject var lastFlightInfo: AppEnvironment
 
   var body: some View {
@@ -54,22 +53,7 @@ struct FlightDetails: View {
       }.foregroundColor(.white)
       .padding()
       .navigationTitle("\(flight.airline) Flight \(flight.number)")
-    }
-    .contentShape(Rectangle())
-    .onTapGesture {
-      showTerminalInfo.toggle()
-    }
-    .sheet(isPresented: $showTerminalInfo) {
-      Group {
-        if flight.terminal == "A" {
-          TerminalAView()
-        } else {
-          TerminalBView()
-        }
-      }
-      .presentationDetents([.medium, .large])
-    }
-    .onAppear {
+    }.onAppear {
       lastFlightInfo.lastFlightId = flight.id
     }
   }
@@ -77,11 +61,10 @@ struct FlightDetails: View {
 
 struct FlightDetails_Previews: PreviewProvider {
   static var previews: some View {
-    NavigationStack {
+    NavigationView {
       FlightDetails(
         flight: FlightData.generateTestFlight(date: Date())
-      )
-      .environmentObject(AppEnvironment())
+      ).environmentObject(AppEnvironment())
     }
   }
 }

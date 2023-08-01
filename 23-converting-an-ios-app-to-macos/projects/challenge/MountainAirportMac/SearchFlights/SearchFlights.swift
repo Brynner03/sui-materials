@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco Inc
+/// Copyright (c) 2020 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -75,17 +75,21 @@ struct SearchFlights: View {
             Text("Arrivals").tag(FlightDirection.arrival)
             Text("Departures").tag(FlightDirection.departure)
         }
-          .background(Color.white)
+        // Challenge - part 1
+        // .background(Color.white)
+          .foregroundColor(.white)
           .pickerStyle(SegmentedPickerStyle())
+        TextField(" Search cities", text: $city)
+          .textFieldStyle(RoundedBorderTextFieldStyle())
         List {
           ForEach(flightDates, id: \.hashValue) { date in
             Section(
               header: Text(longDateFormatter.string(from: date)),
               footer:
-                Text(
-                  "Matching flights " + "\(flightsForDay(date: date).count)"
-                )
-                .frame(maxWidth: .infinity, alignment: .trailing)
+                HStack {
+                  Spacer()
+                  Text("Matching flights \(flightsForDay(date: date).count)")
+                }
             ) {
               ForEach(flightsForDay(date: date)) { flight in
                 SearchResultRow(flight: flight)
@@ -103,19 +107,22 @@ struct SearchFlights: View {
                   .tint(.black)
               }
               .frame(maxWidth: .infinity, maxHeight: .infinity)
-              .background(.gray)
+              .background(.white)
               .opacity(0.8)
             }
           }
         )
-        .listStyle(.inset(alternatesRowBackgrounds: true))
+        .listStyle(.inset)
         Spacer()
       }
       .searchable(text: $city, prompt: "City Name") {
+        // 1
         ForEach(FlightData.citiesContaining(city), id: \.self) { city in
+          // 2
           Text(city).searchCompletion(city)
         }
       }
+      // 1
       .onSubmit(of: .search) {
         Task {
           runningSearch = true
@@ -140,10 +147,9 @@ struct SearchFlights: View {
 
 struct SearchFlights_Previews: PreviewProvider {
   static var previews: some View {
-    NavigationStack {
+    NavigationView {
       SearchFlights(flightData: FlightData.generateTestFlights(date: Date())
       )
     }
-    .environmentObject(AppEnvironment())
   }
 }

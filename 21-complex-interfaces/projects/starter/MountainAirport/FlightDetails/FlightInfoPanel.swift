@@ -1,4 +1,5 @@
-/// Copyright (c) 2023 Kodeco Inc
+/// Copyright (c) 2020 Razeware LLC
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
@@ -68,15 +69,16 @@ struct FlightInfoPanel: View {
           Text("Flying to \(flight.otherAirport)")
         }
         Text(flight.flightStatus) + Text(" (\(timeFormatter.string(from: flight.localTime)))")
-        Button {
+        Button(action: {
           withAnimation {
             showTerminal.toggle()
           }
-        } label: {
-          HStack {
+        }, label: {
+          HStack(alignment: .center) {
             Image(systemName: "airplane.circle")
-              .imageScale(.large)
-              .padding(10)
+              .resizable()
+              .frame(width: 30, height: 30)
+              .padding(.trailing, 10)
               .rotationEffect(.degrees(showTerminal ? 90 : 270))
               .animation(
                 .spring(
@@ -94,11 +96,12 @@ struct FlightInfoPanel: View {
                 Text("Show Terminal Map")
               }
             }
-            .transition(.move(edge: .bottom))
+            .transition(.buttonNameTransition)
             Spacer()
             Image(systemName: "airplane.circle")
-              .imageScale(.large)
-              .padding(10)
+              .resizable()
+              .frame(width: 30, height: 30)
+              .padding(.trailing, 10)
               .rotationEffect(.degrees(showTerminal ? 90 : 270))
               .animation(
                 .spring(
@@ -109,10 +112,9 @@ struct FlightInfoPanel: View {
                 value: showTerminal
               )
           }
-        }
+        })
         if showTerminal {
-          TerminalMapView(flight: flight)
-            .transition(.buttonNameTransition)
+          FlightTerminalMap(flight: flight)
         }
         Spacer()
       }

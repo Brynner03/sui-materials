@@ -1,15 +1,15 @@
-/// Copyright (c) 2023 Kodeco Inc
-/// 
+/// Copyright (c) 2020 Razeware LLC
+///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -31,6 +31,16 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+
+extension AnyTransition {
+  static var buttonNameTransition: AnyTransition {
+    let insertion = AnyTransition.move(edge: .trailing)
+      .combined(with: .opacity)
+    let removal = AnyTransition.scale(scale: 0.0)
+      .combined(with: .opacity)
+    return .asymmetric(insertion: insertion, removal: removal)
+  }
+}
 
 struct FlightInfoPanel: View {
   var flight: FlightInformation
@@ -59,28 +69,39 @@ struct FlightInfoPanel: View {
           Text("Flying to \(flight.otherAirport)")
         }
         Text(flight.flightStatus) + Text(" (\(timeFormatter.string(from: flight.localTime)))")
-        Button {
-          withAnimation(
-            .spring(
-              response: 0.55,
-              dampingFraction: 0.45,
-              blendDuration: 0
-            )
-          ) {
+        Button(action: {
+          withAnimation {
             showTerminal.toggle()
           }
-        } label: {
-          HStack {
+        }, label: {
+          HStack(alignment: .center) {
             Image(systemName: "airplane.circle")
-              .imageScale(.large)
-              .padding(10)
+              .resizable()
+              .frame(width: 30, height: 30)
+              .padding(.trailing, 10)
               .rotationEffect(.degrees(showTerminal ? 90 : 270))
+              .animation(
+                .spring(
+                  response: 0.55,
+                  dampingFraction: 0.45,
+                  blendDuration: 0
+                ),
+                value: showTerminal
+              )
             Spacer()
-            Text(showTerminal ? "Hide Terminal Map" : "Show Terminal Map")
+            Group {
+              if showTerminal {
+                Text("Hide Terminal Map")
+              } else {
+                Text("Show Terminal Map")
+              }
+            }
+            .transition(.buttonNameTransition)
             Spacer()
             Image(systemName: "airplane.circle")
-              .imageScale(.large)
-              .padding(10)
+              .resizable()
+              .frame(width: 30, height: 30)
+              .padding(.trailing, 10)
               .rotationEffect(.degrees(showTerminal ? 90 : 270))
               .animation(
                 .spring(
@@ -91,11 +112,10 @@ struct FlightInfoPanel: View {
                 value: showTerminal
               )
           }
-        }
-        .buttonStyle(.plain)
+        }).buttonStyle(.plain)
 
         if showTerminal {
-          TerminalMapView(flight: flight)
+          FlightTerminalMap(flight: flight)
         }
         Spacer()
       }

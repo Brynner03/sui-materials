@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco Inc.
+/// Copyright (c) 2021 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -39,9 +39,12 @@ struct WelcomeAnimation: View {
           return
         }
 
+        // 1
         let timePosition = (timelineContext.date.timeIntervalSince(startTime))
           .truncatingRemainder(dividingBy: animationLength)
+        // 2
         let xPosition = timePosition / animationLength * size.width
+        // 3
         graphicContext.draw(
           planeSymbol,
           at: .init(x: xPosition, y: size.height / 2.0)

@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco Inc
+/// Copyright (c) 2021 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -58,7 +58,17 @@ struct FlightInfoPanel: View {
           Text("Flying to \(flight.otherAirport)")
         }
         Text(flight.flightStatus) + Text(" (\(timeFormatter.string(from: flight.localTime)))")
-        TerminalMapView(flight: flight)
+        if flight.gate.hasPrefix("A") {
+          Image("terminal-a-map")
+            .resizable()
+            .frame(maxWidth: .infinity)
+            .aspectRatio(contentMode: .fit)
+        } else {
+          Image("terminal-b-map")
+            .resizable()
+            .frame(maxWidth: .infinity)
+            .aspectRatio(contentMode: .fit)
+        }
       }
     }
   }

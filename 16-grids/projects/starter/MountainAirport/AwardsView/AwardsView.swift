@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco Inc
+/// Copyright (c) 2021 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -39,35 +39,32 @@ struct AwardsView: View {
   }
 
   var body: some View {
-    NavigationStack {
-      ScrollView {
-        LazyVStack {
-          ForEach(awardArray, id: \.self) { award in
-            NavigationLink(value: award) {
-              AwardCardView(award: award)
-                .foregroundColor(.black)
-                .frame(width: 150, height: 220)
-            }
-          }
-          .navigationDestination(for: AwardInformation.self) { award in
-            AwardDetails(award: award)
+    ScrollView {
+      LazyVStack {
+        ForEach(awardArray, id: \.self) { award in
+          NavigationLink(
+            destination: AwardDetails(award: award)) {
+            AwardCardView(award: award)
+              .foregroundColor(.black)
+              .frame(width: 150, height: 220)
           }
         }
       }
-      .navigationTitle("Your Awards")
-      .padding()
-      .background(
-        Image("background-view")
-          .resizable()
-          .frame(maxWidth: .infinity, maxHeight: .infinity)
-      )
-    }
+    }.padding()
+    .background(
+      Image("background-view")
+        .resizable()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    )
+    .navigationBarTitle("Your Awards")
   }
 }
 
 struct AwardsView_Previews: PreviewProvider {
   static var previews: some View {
-    AwardsView()
-      .environmentObject(AppEnvironment())
+    NavigationView {
+      AwardsView()
+    }.navigationViewStyle(StackNavigationViewStyle())
+    .environmentObject(AppEnvironment())
   }
 }

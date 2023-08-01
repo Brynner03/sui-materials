@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco Inc
+/// Copyright (c) 2021 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,6 @@ import SwiftUI
 
 struct FlightStatusBoard: View {
   @State var flights: [FlightInformation]
-  var flightToShow: FlightInformation?
   @State private var hidePast = false
   @AppStorage("FlightStatusCurrentTab") var selectedTab = 1
   @State var highlightedIds: [Int] = []
@@ -43,6 +42,13 @@ struct FlightStatusBoard: View {
     hidePast ?
       flights.filter { $0.localTime >= Date() } :
       flights
+  }
+
+  var shortDateString: String {
+    let dateF = DateFormatter()
+    dateF.timeStyle = .none
+    dateF.dateFormat = "MMM d"
+    return dateF.string(from: Date())
   }
 
   func lastUpdateString(_ date: Date) -> String {
@@ -70,13 +76,13 @@ struct FlightStatusBoard: View {
           .tag(0)
           FlightList(
             flights: shownFlights,
-            flightToShow: flightToShow,
             highlightedIds: $highlightedIds
           ).tabItem {
             Image(systemName: "airplane")
               .resizable()
             Text("All")
           }
+          .badge(shortDateString)
           .tag(1)
           FlightList(
             flights: shownFlights.filter { $0.direction == .departure },
@@ -88,12 +94,9 @@ struct FlightStatusBoard: View {
           .badge(shownFlights.filter { $0.direction == .departure }.count)
           .tag(2)
         }
-        .onAppear {
-          if flightToShow != nil {
-            selectedTab = 1
-          }
-        }
+        // 1
         .refreshable {
+          // 2
           await flights = FlightData.refreshFlights()
         }
         .navigationTitle("Flight Status")
@@ -110,11 +113,10 @@ struct FlightStatusBoard: View {
 
 struct FlightStatusBoard_Previews: PreviewProvider {
   static var previews: some View {
-    NavigationStack {
+    NavigationView {
       FlightStatusBoard(
         flights: FlightData.generateTestFlights(date: Date())
       )
     }
-    .environmentObject(AppEnvironment())
   }
 }

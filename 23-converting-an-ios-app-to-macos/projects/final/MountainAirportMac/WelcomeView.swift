@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco Inc
+/// Copyright (c) 2021 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -32,70 +32,13 @@
 
 import SwiftUI
 
-enum FlightViewId: CaseIterable {
-  case showFlightStatus
-  case searchFlights
-  case showLastFlight
-  case showAwards
-}
-
-struct ViewButton: Identifiable {
-  var id: FlightViewId
-  var title: String
-  var subtitle: String
-  var imageName: String
-}
-
 struct WelcomeView: View {
-  @StateObject var flightInfo = FlightData()
-  @StateObject private var appEnvironment = AppEnvironment()
-  @State private var selectedView: FlightViewId?
+  var flightInfo: FlightData
 
-  var sidebarButtons: [ViewButton] {
-    var buttons: [ViewButton] = []
+  @State var showNextFlight = false
+  @StateObject var appEnvironment = AppEnvironment()
 
-    buttons.append(
-      ViewButton(
-        id: .showFlightStatus,
-        title: "Flight Status",
-        subtitle: "Departure and arrival information",
-        imageName: "airplane"
-      )
-    )
-
-    buttons.append(
-      ViewButton(
-        id: .searchFlights,
-        title: "Search Flights",
-        subtitle: "Search Upcoming Flights",
-        imageName: "magnifyingglass"
-      )
-    )
-
-    buttons.append(
-      ViewButton(
-        id: .showAwards,
-        title: "Your Awards",
-        subtitle: "Earn rewards for your airport interactions",
-        imageName: "star"
-      )
-    )
-
-    if let flight = lastViewedFlight {
-      buttons.append(
-        ViewButton(
-          id: .showLastFlight,
-          title: "\(flight.flightName)",
-          subtitle: "The Last Flight You Viewed",
-          imageName: "suit.heart.fill"
-        )
-      )
-    }
-
-    return buttons
-  }
-
-  @SceneStorage("selectedFlightID") var selectedFlightID: Int?
+  @SceneStorage("displayState") var displayState: DisplayState = .none
   @SceneStorage("lastViewedFlightID") var lastViewedFlightID: Int?
 
   var lastViewedFlight: FlightInformation? {
@@ -105,58 +48,58 @@ struct WelcomeView: View {
     return nil
   }
 
-  var selectedFlight: FlightInformation? {
-    if let id = selectedFlightID {
-      return flightInfo.getFlightById(id)
-    }
-    return nil
-  }
-
   var body: some View {
-    NavigationSplitView {
+    VStack {
       WelcomeAnimation()
+        .foregroundColor(.white)
         .frame(height: 40)
         .padding()
-      List(sidebarButtons, selection: $selectedView) { button in
-        WelcomeButtonView(
-          title: button.title,
-          subTitle: button.subtitle,
-          imageName: button.imageName
-        )
+      Button(action: { displayState = .flightBoard }, label: {
+        FlightStatusButton()
+      }).buttonStyle(.plain)
+
+      Button(action: { displayState = .searchFlights }, label: {
+        SearchFlightsButton()
+      }).buttonStyle(.plain)
+
+      Button(action: { displayState = .awards }, label: {
+        AwardsButton()
+      }).buttonStyle(.plain)
+
+      Button(action: { displayState = .timeline }, label: {
+        TimelineButton()
+      }).buttonStyle(.plain)
+
+      if let lastFlight = lastViewedFlight {
+        Button(action: {
+          displayState = .lastFlight
+          showNextFlight = true
+        }, label: {
+          LastViewedButton(name: lastFlight.flightName)
+        }).buttonStyle(.plain)
       }
-      .navigationTitle("Mountain Airport")
-      .listStyle(.plain)
-      .frame(minWidth: 250, minHeight: 400)
-    } detail: {
-      if let view = selectedView {
-        switch view {
-        case .showFlightStatus:
-          HSplitView {
-            FlightStatusBoard(flights: flightInfo.getDaysFlights(Date()))
-            FlightDetails(flight: selectedFlight)
-          }
-        case .searchFlights:
-          SearchFlights(flightData: flightInfo.flights)
-        case .showLastFlight:
-          if let lastFlight = lastViewedFlight {
-            HSplitView {
-              FlightStatusBoard(flights: flightInfo.getDaysFlights(Date()))
-              FlightDetails(flight: lastFlight)
-            }
-          }
-        case .showAwards:
-          AwardsView()
-        }
-      } else {
-        Text("Select an option in the sidebar.")
-      }
+      Spacer()
     }
-    .environmentObject(appEnvironment)
+    .padding()
+    .frame(
+      minWidth: 190,
+      idealWidth: 190,
+      maxWidth: 190,
+      minHeight: 800,
+      idealHeight: 800,
+      maxHeight: .infinity
+    )
+    .background(
+      Image("welcome-background")
+        .resizable()
+        .aspectRatio(contentMode: .fill)
+    )
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct WelcomeView_Previews: PreviewProvider {
   static var previews: some View {
-    WelcomeView()
+    WelcomeView(flightInfo: FlightData())
+      .previewLayout(.fixed(width: 190, height: 800))
   }
 }

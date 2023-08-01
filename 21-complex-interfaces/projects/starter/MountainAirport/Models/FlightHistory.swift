@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco Inc
+/// Copyright (c) 2020 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -60,11 +60,11 @@ class FlightHistory: NSObject {
     }
 
     if timeDifference < 0 {
-      return "\(-timeDifference) m"
+      return "Early by \(-timeDifference) minutes."
     } else if timeDifference == 0 {
       return "On time"
     } else {
-      return "\(timeDifference) m"
+      return "Late by \(timeDifference) minutes."
     }
   }
 

@@ -1,4 +1,4 @@
-/// Copyright (c) 2023 Kodeco Inc
+/// Copyright (c) 2020 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -230,12 +230,12 @@ class FlightData: ObservableObject {
   }
 
   static func refreshFlights() async -> [FlightInformation] {
-    sleep(3) // Three seconds
+    await Task.sleep(3 * 1_000_000_000) // Three seconds
     return FlightData.generateTestFlights(date: Date())
   }
 
   static func searchFlightsForCity(_ city: String) async -> [FlightInformation] {
-    sleep(3) // Three seconds
+    await Task.sleep(3 * 1_000_000_000) // Three seconds
 
     let flights = FlightData().flights
     guard !city.isEmpty else {

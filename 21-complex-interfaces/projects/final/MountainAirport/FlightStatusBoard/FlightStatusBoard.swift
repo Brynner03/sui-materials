@@ -1,14 +1,15 @@
-/// Copyright (c) 2023 Kodeco Inc
+/// Copyright (c) 2021 Razeware LLC
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -33,7 +34,6 @@ import SwiftUI
 
 struct FlightStatusBoard: View {
   @State var flights: [FlightInformation]
-  var flightToShow: FlightInformation?
   @State private var hidePast = false
   @AppStorage("FlightStatusCurrentTab") var selectedTab = 1
   @State var highlightedIds: [Int] = []
@@ -76,7 +76,6 @@ struct FlightStatusBoard: View {
           .tag(0)
           FlightList(
             flights: shownFlights,
-            flightToShow: flightToShow,
             highlightedIds: $highlightedIds
           ).tabItem {
             Image(systemName: "airplane")
@@ -95,12 +94,9 @@ struct FlightStatusBoard: View {
           .badge(shownFlights.filter { $0.direction == .departure }.count)
           .tag(2)
         }
-        .onAppear {
-          if flightToShow != nil {
-            selectedTab = 1
-          }
-        }
+        // 1
         .refreshable {
+          // 2
           await flights = FlightData.refreshFlights()
         }
         .navigationTitle("Flight Status")
@@ -117,11 +113,10 @@ struct FlightStatusBoard: View {
 
 struct FlightStatusBoard_Previews: PreviewProvider {
   static var previews: some View {
-    NavigationStack {
+    NavigationView {
       FlightStatusBoard(
         flights: FlightData.generateTestFlights(date: Date())
       )
     }
-    .environmentObject(AppEnvironment())
   }
 }
