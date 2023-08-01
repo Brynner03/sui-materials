@@ -54,14 +54,20 @@ struct WelcomeView: View {
         }
         ScrollView {
           VStack {
-            FlightStatusButton(flightInfo: flightInfo)
-            SearchFlightsButton(flightInfo: flightInfo)
-            AwardsButton()
-            LastViewedButton(
-              flightInfo: flightInfo,
-              appEnvironment: appEnvironment,
-              showNextFlight: $showNextFlight
-            )
+            HStack {
+              FlightStatusButton(flightInfo: flightInfo)
+              Spacer()
+              SearchFlightsButton(flightInfo: flightInfo)
+            }
+            HStack {
+              AwardsButton()
+              LastViewedButton(
+                flightInfo: flightInfo,
+                appEnvironment: appEnvironment,
+                showNextFlight: $showNextFlight
+              )
+            }
+            Spacer()
           }.font(.title)
           .foregroundColor(.white)
           .padding()
