@@ -32,6 +32,7 @@ struct FlightList: View {
   var flights: [FlightInformation]
   var flightToShow: FlightInformation?
   @State private var path: [FlightInformation] = []
+  @Binding var highlightedIds: [Int]
 
   var nextFlightId: Int {
     guard let flight = flights.first(
@@ -43,6 +44,10 @@ struct FlightList: View {
     }
     return flight.id
   }
+  
+  func rowHighlighted(_ flightId: Int) -> Bool {
+    return highlightedIds.contains(flightId)
+  }
 
   var body: some View {
     NavigationStack(path: $path) {
@@ -50,6 +55,16 @@ struct FlightList: View {
         List(flights) { flight in
           NavigationLink(value: flight) {
             FlightRow(flight: flight)
+          }
+          .listRowBackground(
+            rowHighlighted(flight.id) ? Color.yellow.opacity(0.6) :
+            Color.clear
+          )
+          .swipeActions(edge: .leading) {
+            HighlightedActionView(
+              flightId: flight.id,
+              highlightedIds: $highlightedIds
+            )
           }
         }
         .navigationDestination(
@@ -75,7 +90,8 @@ struct FlightList_Previews: PreviewProvider {
   static var previews: some View {
     NavigationStack {
       FlightList(
-        flights: FlightData.generateTestFlights(date: Date())
+        flights: FlightData.generateTestFlights(date: Date()),
+        highlightedIds: .constant([15])
       )
     }
     .environmentObject(FlightNavigationInfo())
