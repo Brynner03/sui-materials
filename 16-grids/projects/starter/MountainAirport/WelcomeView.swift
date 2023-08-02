@@ -53,22 +53,22 @@ struct WelcomeView: View {
           ) { }
         }
         ScrollView {
-          VStack {
-            HStack {
-              FlightStatusButton(flightInfo: flightInfo)
-              Spacer()
-              SearchFlightsButton(flightInfo: flightInfo)
-            }
-            HStack {
-              AwardsButton()
-              LastViewedButton(
-                flightInfo: flightInfo,
-                appEnvironment: appEnvironment,
-                showNextFlight: $showNextFlight
-              )
-            }
-            Spacer()
-          }.font(.title)
+          LazyVGrid(
+            columns: [
+              GridItem(.fixed(160)),
+              GridItem(.fixed(160))
+            ], spacing: 15
+          ) {
+            FlightStatusButton(flightInfo: flightInfo)
+            SearchFlightsButton(flightInfo: flightInfo)
+            AwardsButton()
+            LastViewedButton(
+              flightInfo: flightInfo,
+              appEnvironment: appEnvironment,
+              showNextFlight: $showNextFlight
+            )
+          }
+          .font(.title)
           .foregroundColor(.white)
           .padding()
         }
