@@ -36,6 +36,9 @@ struct FlightSearchDetails: View {
   var flight: FlightInformation
   @Binding var showModal: Bool
   @State var reebokAlert = false
+  @State private var checkInFlight: CheckInInfo?
+  @State private var showFlightHistory = false
+  @State private var showCheckIn = false
   @EnvironmentObject var lastFlightInfo: AppEnvironment
 
   var body: some View {
@@ -64,6 +67,45 @@ struct FlightSearchDetails: View {
                   )
               }
           }
+          
+          if flight.isCheckInAvailable {
+              Button("Check In for Flight") {
+                  checkInFlight =
+                  CheckInInfo(
+                    airline: flight.airline,
+                    flight: flight.number
+                  )
+                  showCheckIn = true
+              }
+              .confirmationDialog(
+                "Check In",
+                isPresented: $showCheckIn,
+                presenting: checkInFlight) { checkIn in
+                    Button("Check In") {
+                        print(
+                            "Check-in for \(checkIn.airline) \(checkIn.flight)."
+                        )
+                    }
+                    Button("Reschedule", role: .destructive) {
+                        print("Reschedule flight.")
+                    }
+                    Button("Not Now", role: .cancel) { }
+                } message: { checkIn in
+                    Text("Check in for \(checkIn.airline) " +
+                         "Flight \(checkIn.flight)"
+                    )
+                }
+          }
+          
+          Button("On-Time History") {
+              showFlightHistory.toggle()
+          }
+          .popover(
+            isPresented: $showFlightHistory,
+            arrowEdge: .top) {
+                FlightTimeHistory(flight: flight)
+            }
+          
         FlightInfoPanel(flight: flight)
           .padding()
           .background(
