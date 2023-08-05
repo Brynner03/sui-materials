@@ -10,28 +10,28 @@ The main goal of this project is to learn SwiftUI through practical tutorials an
 
 The book covers various topics in SwiftUI development:
 
-1. **Introduction**: An overview of SwiftUI and its capabilities, along with setting up the development environment.
-2. **Getting Started**: Building a basic SwiftUI app and understanding the essential concepts.
-3. **Diving Deeper into SwiftUI**: Exploring more advanced SwiftUI features and techniques.
-4. **Testing & Debugging**: Understanding testing and debugging practices in SwiftUI development.
-5. **Intro to Controls: Text & Image**: Introduction to basic controls like text and image views.
-6. **Controls & User Input**: Working with various controls and handling user input.
-7. **Introducing Stacks & Containers**: Learning about stacks and containers for flexible layout management.
-8. **State & Data Flow - Part I**: Understanding SwiftUI state and data flow concepts.
-9. **State & Data Flow - Part II**: Further exploration of SwiftUI state management techniques.
-10. **More User Input & App Storage**: Incorporating additional user input elements and app data storage options.
-11. **Gestures**: Implementing gestures and touch interactions in SwiftUI apps.
-12. **Accessibility**: Ensuring accessibility in SwiftUI interfaces for all users.
-13. **Navigation**: Navigating between different views and screens in SwiftUI apps.
-14. **Lists**: Working with SwiftUI lists to display data.
-15. **Advanced Lists**: Exploring advanced list features and customization options.
-16. **Grids**: Creating grids and using them to organize content in SwiftUI.
-17. **Sheets & Alert Views**: Working with sheets and alert views to present modal content.
-18. **Drawing & Custom Graphics**: Learning about drawing and creating custom graphics in SwiftUI.
-19. **Animations & View Transitions**: Implementing animations and view transitions to enhance the user experience.
-20. **Complex Interfaces**: Building complex and interactive user interfaces in SwiftUI.
-21. **Building a Mac App**: Adapting SwiftUI for macOS app development.
-22. **Converting an iOS App to macOS**: Migrating an existing iOS app to macOS using SwiftUI.
+1. <u>**Introduction**</u>: An overview of SwiftUI and its capabilities, along with setting up the development environment.
+2. <u>**Getting Started**</u>: Building a basic SwiftUI app and understanding the essential concepts.
+3. <u>**Diving Deeper into SwiftUI**</u>: Exploring more advanced SwiftUI features and techniques.
+4. <u>**Testing & Debugging**</u>: Understanding testing and debugging practices in SwiftUI development.
+5. <u>**Intro to Controls: Text & Image**</u>: Introduction to basic controls like text and image views.
+6. <u>**Controls & User Input**</u>: Working with various controls and handling user input.
+7. <u>**Introducing Stacks & Containers**</u>: Learning about stacks and containers for flexible layout management.
+8. <u>**State & Data Flow - Part I**</u>: Understanding SwiftUI state and data flow concepts.
+9. <u>**State & Data Flow - Part II**</u>: Further exploration of SwiftUI state management techniques.
+10. <u>**More User Input & App Storage**</u>: Incorporating additional user input elements and app data storage options.
+11. <u>**Gestures**</u>: Implementing gestures and touch interactions in SwiftUI apps.
+12. <u>**Accessibility**</u>: Ensuring accessibility in SwiftUI interfaces for all users.
+13. <u>**Navigation**</u>: Navigating between different views and screens in SwiftUI apps.
+14. <u>**Lists**</u>: Working with SwiftUI lists to display data.
+15. <u>**Advanced Lists**</u>: Exploring advanced list features and customization options.
+16. <u>**Grids**</u>: Creating grids and using them to organize content in SwiftUI.
+17. <u>**Sheets & Alert Views**</u>: Working with sheets and alert views to present modal content.
+18. <u>**Drawing & Custom Graphics**</u>: Learning about drawing and creating custom graphics in SwiftUI.
+19. <u>**Animations & View Transitions**</u>: Implementing animations and view transitions to enhance the user experience.
+20. <u>**Complex Interfaces**</u>: Building complex and interactive user interfaces in SwiftUI.
+21. <u>**Building a Mac App**</u>: Adapting SwiftUI for macOS app development.
+22. <u>**Converting an iOS App to macOS**</u>: Migrating an existing iOS app to macOS using SwiftUI.
 
 ## Progress
 
