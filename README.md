@@ -8,30 +8,30 @@ The main goal of this project is to learn SwiftUI through practical tutorials an
 
 ## Book Outline
 
-The book covers various topics in SwiftUI development. Here's a brief outline of what to expect:
+The book covers various topics in SwiftUI development:
 
-1. Introduction
-2. Getting Started
-3. Diving Deeper into SwiftUI
-4. Testing & Debugging
-5. Intro to Controls: Text & Image
-6. Controls & User Input
-7. Introducing Stacks & Containers
-8. State & Data Flow - Part I
-9. State & Data Flow - Part II
-10. More User Input & App Storage
-11. Gestures
-12. Accessibility
-13. Navigation
-14. Lists
-15. Advanced Lists
-16. Grids
-17. Sheets & Alert Views
-18. Drawing & Custom Graphics
-19. Animations & View Transitions
-20. Complex Interfaces
-21. Building a Mac App
-22. Converting an iOS App to macOS
+1. **Introduction**: An overview of SwiftUI and its capabilities, along with setting up the development environment.
+2. **Getting Started**: Building a basic SwiftUI app and understanding the essential concepts.
+3. **Diving Deeper into SwiftUI**: Exploring more advanced SwiftUI features and techniques.
+4. **Testing & Debugging**: Understanding testing and debugging practices in SwiftUI development.
+5. **Intro to Controls: Text & Image**: Introduction to basic controls like text and image views.
+6. **Controls & User Input**: Working with various controls and handling user input.
+7. **Introducing Stacks & Containers**: Learning about stacks and containers for flexible layout management.
+8. **State & Data Flow - Part I**: Understanding SwiftUI state and data flow concepts.
+9. **State & Data Flow - Part II**: Further exploration of SwiftUI state management techniques.
+10. **More User Input & App Storage**: Incorporating additional user input elements and app data storage options.
+11. **Gestures**: Implementing gestures and touch interactions in SwiftUI apps.
+12. **Accessibility**: Ensuring accessibility in SwiftUI interfaces for all users.
+13. **Navigation**: Navigating between different views and screens in SwiftUI apps.
+14. **Lists**: Working with SwiftUI lists to display data.
+15. **Advanced Lists**: Exploring advanced list features and customization options.
+16. **Grids**: Creating grids and using them to organize content in SwiftUI.
+17. **Sheets & Alert Views**: Working with sheets and alert views to present modal content.
+18. **Drawing & Custom Graphics**: Learning about drawing and creating custom graphics in SwiftUI.
+19. **Animations & View Transitions**: Implementing animations and view transitions to enhance the user experience.
+20. **Complex Interfaces**: Building complex and interactive user interfaces in SwiftUI.
+21. **Building a Mac App**: Adapting SwiftUI for macOS app development.
+22. **Converting an iOS App to macOS**: Migrating an existing iOS app to macOS using SwiftUI.
 
 ## Progress
 
@@ -62,4 +62,8 @@ I will update this section regularly to keep track of my progress throughout the
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Kodeco License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Feel free to explore the code and track my progress as I learn SwiftUI using the "SwiftUI by Tutorials - Fifth Edition" book. Happy learning and coding with SwiftUI!
