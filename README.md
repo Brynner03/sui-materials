@@ -1,6 +1,6 @@
 # SwiftUI by Tutorials
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Kodeco-blue.svg)](LICENSE)
 [![GitHub last commit](https://img.shields.io/github/last-commit/Brynner03/sui-materials/editions/5.0)](https://github.com/Brynner03/sui-materials/commits/editions/5.0)
 ## About the Project
 
