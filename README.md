@@ -1,19 +1,46 @@
-# SwiftUI by Tutorials: Materials
+# SwiftUI by Tutorials
 
-This repo contains all the downloadable materials and projects associated with the **[SwiftUI by Tutorials](https://www.kodeco.com/books/swiftui-by-tutorials)** from [Kodeco](https://www.kodeco.com).
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/yourusername/swiftui-by-tutorials)](https://github.com/yourusername/swiftui-by-tutorials/commits/main)
 
-Each edition has its own branch, named `editions/[EDITION]`. The default branch for this repo is for the most recent edition
+## About the Project
 
-## Forum
+The main goal of this project is to learn SwiftUI through practical tutorials and examples provided in the book "SwiftUI by Tutorials" by the raywenderlich.com team. The project will include the code and projects I create while working through the book.
 
-We’ve set up an official forum for the book at [https://forums.kodeco.com/c/books/swiftui-by-tutorials](https://forums.kodeco.com/c/books/swiftui-by-tutorials). This is a great place to ask questions about the book or to submit any errors you may find.
+## Book Outline
 
+The book covers various topics in SwiftUI development. Here's a brief outline of what to expect:
 
-## Release History
+1. Introduction to SwiftUI
+2. Understanding SwiftUI Architecture
+3. Building a SwiftUI App
+4. Data and SwiftUI
+5. SwiftUI and Combine
+6. Advanced SwiftUI Animations
+7. Mastering Lists and Navigation
+8. Drawing and Custom Graphics
+9. Building a Complete Project
+10. Testing SwiftUI
+11. Migrating to SwiftUI
+12. Beyond SwiftUI
 
-| Branch                                                                           | Edition | Release Date |
-| -------------------------------------------------------------------------------- |:-------:|:------------:|
-| [editions/5.0](https://github.com/kodecocodes/sui-materials/tree/editions/5.0) | 5.0     | YYYY-MMM-DD   |
-| [editions/4.0](https://github.com/kodecocodes/sui-materials/tree/editions/4.0) | 4.0     | 2021-11-10   |
-| [editions/3.0](https://github.com/kodecocodes/sui-materials/tree/editions/3.0) | 3.0     | 2021-03-17   |
-| [editions/2.0](https://github.com/kodecocodes/sui-materials/tree/editions/2.0) | 2.0     | 2020-06-16   |
+## Progress
+
+I will update this section regularly to keep track of my progress throughout the book. Feel free to explore the code and projects as I move through the chapters.
+
+- [x] Chapter 1: Introduction to SwiftUI
+- [ ] Chapter 2: Understanding SwiftUI Architecture
+- [ ] Chapter 3: Building a SwiftUI App
+- [ ] Chapter 4: Data and SwiftUI
+- [ ] Chapter 5: SwiftUI and Combine
+- [ ] Chapter 6: Advanced SwiftUI Animations
+- [ ] Chapter 7: Mastering Lists and Navigation
+- [ ] Chapter 8: Drawing and Custom Graphics
+- [ ] Chapter 9: Building a Complete Project
+- [ ] Chapter 10: Testing SwiftUI
+- [ ] Chapter 11: Migrating to SwiftUI
+- [ ] Chapter 12: Beyond SwiftUI
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
