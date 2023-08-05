@@ -66,4 +66,4 @@ This project is licensed under the Kodeco License - see the [LICENSE](LICENSE) f
 
 ---
 
-Feel free to explore the code and track my progress as I learn SwiftUI using the "SwiftUI by Tutorials - Fifth Edition" book. Happy learning and coding with SwiftUI!
+Feel free to explore the code and track my progress as I learn SwiftUI using the "SwiftUI by Tutorials - Fourth Edition" book. Happy learning and coding with SwiftUI!
