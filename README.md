@@ -1,8 +1,7 @@
 # SwiftUI by Tutorials
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![GitHub last commit]([https://img.shields.io/github/last-commit/Brynner03/swiftui-by-tutorials)](https://github.com/Brynner03/swiftui-by-tutorials/commits/main](https://github.com/Brynner03/sui-materials/tree/editions/5.0))
-
+[![GitHub last commit](https://img.shields.io/github/last-commit/Brynner03/sui-materials/editions/5.0)](https://github.com/Brynner03/sui-materials/commits/editions/5.0)
 ## About the Project
 
 The main goal of this project is to learn SwiftUI through practical tutorials and examples provided in the book "SwiftUI by Tutorials" by the raywenderlich.com team. The project will include the code and projects I create while working through the book.
