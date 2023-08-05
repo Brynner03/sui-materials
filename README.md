@@ -1,7 +1,7 @@
 # SwiftUI by Tutorials
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![GitHub last commit](https://img.shields.io/github/last-commit/Brynner03/swiftui-by-tutorials)](https://github.com/Brynner03/swiftui-by-tutorials/commits/main)
+[![GitHub last commit]([https://img.shields.io/github/last-commit/Brynner03/swiftui-by-tutorials)](https://github.com/Brynner03/swiftui-by-tutorials/commits/main](https://github.com/Brynner03/sui-materials/tree/editions/5.0))
 
 ## About the Project
 
