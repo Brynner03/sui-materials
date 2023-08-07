@@ -77,7 +77,7 @@ I will update this section regularly to keep track of my progress throughout the
 - [x] Chapter 16: Grids
 - [x] Chapter 17: Sheets & Alert Views
 - [x] Chapter 18: Drawing & Custom Graphics
-- [ ] Chapter 19: Animations & View Transitions
+- [x] Chapter 19: Animations & View Transitions
 - [ ] Chapter 20: Complex Interfaces
 - [ ] Chapter 21: Building a Mac App
 - [ ] Chapter 22: Converting an iOS App to macOS

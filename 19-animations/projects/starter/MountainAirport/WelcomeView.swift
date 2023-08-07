@@ -44,11 +44,14 @@ struct WelcomeView: View {
           .resizable()
           .frame(height: 250)
         NavigationLink(
-          // swiftlint:disable:next force_unwrapping
           destination: FlightDetails(flight: flightInfo.flights.first!),
           isActive: $showNextFlight
         ) { }
         ScrollView {
+          WelcomeAnimation()
+            .foregroundColor(.white)
+            .frame(height: 40)
+            .padding()
           LazyVGrid(
             columns: [
               GridItem(.fixed(160)),
