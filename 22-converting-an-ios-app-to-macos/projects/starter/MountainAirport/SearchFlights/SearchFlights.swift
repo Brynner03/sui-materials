@@ -71,12 +71,12 @@ struct SearchFlights: View {
         Picker(
           selection: $directionFilter,
           label: Text("Flight Direction")) {
-          Text("All").tag(FlightDirection.none)
-          Text("Arrivals").tag(FlightDirection.arrival)
-          Text("Departures").tag(FlightDirection.departure)
+            Text("All").tag(FlightDirection.none)
+            Text("Arrivals").tag(FlightDirection.arrival)
+            Text("Departures").tag(FlightDirection.departure)
         }
-        .background(Color.white)
-        .pickerStyle(SegmentedPickerStyle())
+          .background(Color.white)
+          .pickerStyle(SegmentedPickerStyle())
         TextField(" Search cities", text: $city)
           .textFieldStyle(RoundedBorderTextFieldStyle())
         List {
@@ -110,7 +110,7 @@ struct SearchFlights: View {
             }
           }
         )
-        .listStyle(InsetGroupedListStyle())
+        .listStyle(.inset)
         Spacer()
       }
       .searchable(text: $city, prompt: "City Name") {
@@ -137,7 +137,7 @@ struct SearchFlights: View {
           }
         }
       }
-      .navigationBarTitle("Search Flights")
+      .navigationTitle("Search Flights")
       .padding()
     }
   }

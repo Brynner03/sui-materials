@@ -79,8 +79,8 @@ I will update this section regularly to keep track of my progress throughout the
 - [x] Chapter 18: Drawing & Custom Graphics
 - [x] Chapter 19: Animations & View Transitions
 - [x] Chapter 20: Complex Interfaces
-- [ ] Chapter 21: Building a Mac App
-- [ ] Chapter 22: Converting an iOS App to macOS
+- [x] Chapter 21: Building a Mac App
+- [x] Chapter 22: Converting an iOS App to macOS
 
 ## License
 

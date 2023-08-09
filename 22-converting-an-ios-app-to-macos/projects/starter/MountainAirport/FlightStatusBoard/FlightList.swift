@@ -35,6 +35,7 @@ import SwiftUI
 struct FlightList: View {
   var flights: [FlightInformation]
   @Binding var highlightedIds: [Int]
+    @SceneStorage("selectedFlightID") var selectedFlightID: Int?
 
   func rowHighlighted(_ flightId: Int) -> Bool {
     return highlightedIds.contains { $0 == flightId }
@@ -55,24 +56,19 @@ struct FlightList: View {
   var body: some View {
     ScrollViewReader { scrollProxy in
       List(flights) { flight in
-        NavigationLink(
-          destination: FlightDetails(flight: flight)) {
-          FlightRow(flight: flight)
-        }
-        .listRowBackground(
-          rowHighlighted(flight.id) ? Color.yellow.opacity(0.6) : Color.clear
-        )
-        // 1
-        .swipeActions(edge: .leading) {
-          // 2
-          HighlightActionView(flightId: flight.id, highlightedIds: $highlightedIds)
-        }
+          Button(action: {
+              selectedFlightID = flight.id
+          }, label: {
+              FlightRow(flight: flight)
+          })
+          .buttonStyle(.plain)
       }.onAppear {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-          scrollProxy.scrollTo(nextFlightId, anchor: .center)
+          scrollProxy.scrollTo(nextFlightId, anchor: .top)
         }
       }
     }
+    .frame(minWidth: 350)
   }
 }
 

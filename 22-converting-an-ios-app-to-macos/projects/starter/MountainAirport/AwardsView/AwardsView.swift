@@ -33,7 +33,7 @@
 import SwiftUI
 
 struct AwardsView: View {
-  @EnvironmentObject var flightNavigation: AppEnvironment
+  @State var flightNavigation = AppEnvironment()
   @State var selectedAward: AwardInformation?
   @Namespace var cardNamespace
 
@@ -100,9 +100,8 @@ struct AwardsView: View {
 
 struct AwardsView_Previews: PreviewProvider {
   static var previews: some View {
-    NavigationView {
       AwardsView()
-    }.navigationViewStyle(StackNavigationViewStyle())
-    .environmentObject(AppEnvironment())
+        .environmentObject(AppEnvironment())
+    
   }
 }

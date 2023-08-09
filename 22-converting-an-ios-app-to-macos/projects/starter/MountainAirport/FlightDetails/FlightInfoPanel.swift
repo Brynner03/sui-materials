@@ -113,6 +113,7 @@ struct FlightInfoPanel: View {
               )
           }
         })
+        .buttonStyle(.plain)
         if showTerminal {
           FlightTerminalMap(flight: flight)
         }

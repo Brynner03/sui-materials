@@ -49,14 +49,14 @@ extension MapCoordinator: MKMapViewDelegate {
   ) -> MKOverlayRenderer {
     if overlay is MKCircle {
       let renderer = MKCircleRenderer(overlay: overlay)
-      renderer.fillColor = UIColor.black
-      renderer.strokeColor = UIColor.black
+      renderer.fillColor = NSColor.black
+      renderer.strokeColor = NSColor.black
       return renderer
     }
 
     if overlay is MKGeodesicPolyline {
       let renderer = MKPolylineRenderer(overlay: overlay)
-      renderer.strokeColor = UIColor(
+      renderer.strokeColor = NSColor(
         red: 0.0,
         green: 0.0,
         blue: 1.0,
@@ -72,12 +72,12 @@ extension MapCoordinator: MKMapViewDelegate {
   }
 }
 
-struct FlightMapView: UIViewRepresentable {
+struct FlightMapView: NSViewRepresentable {
   var startCoordinate: CLLocationCoordinate2D
   var endCoordinate: CLLocationCoordinate2D
   var progress: CGFloat
 
-  func makeUIView(context: Context) -> MKMapView {
+  func makeNSView(context: Context) -> MKMapView {
     let view = MKMapView(frame: .zero)
     view.delegate = context.coordinator
     return view
@@ -87,7 +87,7 @@ struct FlightMapView: UIViewRepresentable {
     MapCoordinator(self, progress: progress)
   }
 
-  func updateUIView(_ view: MKMapView, context: Context) {
+  func updateNSView(_ view: MKMapView, context: Context) {
     let startOverlay = MKCircle(
       center: startCoordinate,
       radius: 10000.0
@@ -121,7 +121,7 @@ struct FlightMapView: UIViewRepresentable {
     )
     // 4
     let paddingSize = CGFloat(10.0)
-    let padding = UIEdgeInsets(
+    let padding = NSEdgeInsets(
       top: paddingSize,
       left: paddingSize,
       bottom: paddingSize,

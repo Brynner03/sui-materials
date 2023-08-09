@@ -42,7 +42,7 @@ struct WelcomeButtonView: View {
     VStack(alignment: .leading) {
       Image(systemName: imageName)
         .resizable()
-        .frame(width: 30, height: 30)
+        .frame(width: 20, height: 20)
         .padding(10)
         .background(
           Circle()
@@ -57,7 +57,7 @@ struct WelcomeButtonView: View {
         .font(.subheadline)
     }.foregroundColor(.white)
     .padding()
-    .frame(width: 155, height: 220, alignment: .leading)
+    .frame(width: 155, height: 140, alignment: .leading)
     .background(
       Image("link-pattern")
         .resizable()

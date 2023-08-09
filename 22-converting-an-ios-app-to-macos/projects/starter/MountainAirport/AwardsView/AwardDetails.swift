@@ -34,6 +34,7 @@ import SwiftUI
 
 struct AwardDetails: View {
   var award: AwardInformation
+    @Environment(\.dismiss) var dismiss
 
   func imageSize(proxy: GeometryProxy) -> Double {
     let size = min(proxy.size.width, proxy.size.height)
@@ -42,6 +43,16 @@ struct AwardDetails: View {
 
   var body: some View {
     VStack(alignment: .center) {
+        HStack {
+            Spacer()
+            Button(action: {
+                dismiss()
+            }, label: {
+                Image(systemName: "xmark.circle")
+                    .font(.largeTitle)
+            })
+            .buttonStyle(.plain)
+        }
       Image(award.imageName)
         .resizable()
         .aspectRatio(contentMode: .fit)

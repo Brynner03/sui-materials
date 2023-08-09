@@ -35,7 +35,7 @@ import SwiftUI
 struct FlightStatusBoard: View {
   @State var flights: [FlightInformation]
   @State private var hidePast = false
-  @AppStorage("FlightStatusCurrentTab") var selectedTab = 1
+  @SceneStorage("FlightStatusCurrentTab") var selectedTab = 1
   @State var highlightedIds: [Int] = []
 
   var shownFlights: [FlightInformation] {
@@ -100,12 +100,9 @@ struct FlightStatusBoard: View {
           await flights = FlightData.refreshFlights()
         }
         .navigationTitle("Flight Status")
-        .navigationBarItems(
-          trailing: Toggle(
-            "Hide Past",
-            isOn: $hidePast
-          )
-        )
+        .toolbar {
+            Toggle("Hide Past", isOn: $hidePast)
+        }
       }
     }
   }

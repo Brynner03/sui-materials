@@ -187,22 +187,6 @@ class FlightInformation: NSObject {
     return Color.red
   }
 
-  var timelineColor: UIColor {
-    if status == .canceled {
-      return UIColor(red: 0.5, green: 0, blue: 0, alpha: 1)
-    }
-
-    if timeDifference <= 0 {
-      return UIColor(red: 0.0, green: 0.6, blue: 0, alpha: 1)
-    }
-
-    if timeDifference <= 15 {
-      return UIColor.yellow
-    }
-
-    return UIColor.red
-  }
-
   var isToday: Bool {
     Calendar.current.isDateInToday(localTime)
   }
